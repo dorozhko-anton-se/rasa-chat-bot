@@ -1,0 +1,87 @@
+intents:
+  - request_beer_selection:
+      use_entities: []
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - chuck_fact
+
+actions:
+  - utter_greet
+  - utter_cheer_up
+  - utter_did_that_help
+  - utter_happy
+  - utter_goodbye
+  - utter_iamabot
+  - action_chuck_fact
+
+entities:
+  - isOrganic
+  - hasLabels
+  - styleId
+
+slots:
+  isOrganic:
+    type: bool
+    auto_fill: false
+  hasLabels:
+    type: bool
+    auto_fill: false
+  styleId:
+    type: text
+    auto_fill: false
+
+forms:
+  - beer_selection_form
+
+responses:
+  utter_greet:
+    - text: "Привет! Как ваши дела?"
+
+  utter_cheer_up:
+    - text: "Вот кое-что, чтобы подбодрить вас:"
+      image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+    - text: "Это тебе помогло?"
+
+  utter_happy:
+    - text: "Отлично, продолжай!"
+
+  utter_goodbye:
+    - text: "До свидания"
+
+  utter_iamabot:
+    - text: "Я бот, работающий на Rasa."
+
+  utter_ask_isOrganic:
+    - text: "Органическое?"
+      buttons:
+        - title: "Да"
+          payload: '/choose{"isOrganic": true}'
+        - title: "Нет"
+          payload: '/choose{"isOrganic": false}'
+
+  utter_ask_hasLabels:
+    - text: "С этикеткой?"
+      buttons:
+        - title: "Да"
+          payload: '/choose{"hasLabels": true}'
+        - title: "Нет"
+          payload: '/choose{"hasLabels": false}'
+
+  utter_ask_styleId:
+    - text: "Из какой категории выбрать пиво?"
+      buttons:
+        - title: "Европейско-германский лагер"
+          payload: '/choose{"styleId": "7"}'
+        - title: "Ирландский эль"
+          payload: '/choose{"styleId": "2"}'
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
